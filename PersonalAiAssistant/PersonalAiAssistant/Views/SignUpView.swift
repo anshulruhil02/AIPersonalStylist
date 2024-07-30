@@ -87,6 +87,7 @@ struct SignUpView: View {
             } else {
                 self.errorMessage = nil
                 // Navigate to the main content view
+                MainView()
             }
         }
     }

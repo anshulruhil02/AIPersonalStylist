@@ -3,6 +3,7 @@ import FirebaseAuth
 
 enum NavigationPath: Hashable {
     case mainView
+    case signUpView
 }
 
 struct SignInView: View {
@@ -64,7 +65,7 @@ struct SignInView: View {
                 .padding(.horizontal)
                 .padding(.top, 20)
                 
-                NavigationLink("Don't have an account? Sign Up", value: NavigationPath.mainView)
+                NavigationLink("Don't have an account? Sign Up", value: NavigationPath.signUpView)
                     .font(.custom("YourCustomFont-Regular", size: 18))
                     .padding(.top, 20)
                 
@@ -79,6 +80,8 @@ struct SignInView: View {
                 switch path {
                 case .mainView:
                     MainView()
+                case .signUpView:
+                    SignUpView()
                 }
             }
         }

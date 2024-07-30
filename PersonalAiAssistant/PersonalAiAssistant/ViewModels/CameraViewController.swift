@@ -4,12 +4,14 @@ import Vision
 
 struct CameraViewController: UIViewControllerRepresentable {
     @Binding var faceDetected: Bool
+    @Binding var faceBoundaries: CGRect?
     @Binding var skinColor: UIColor
     var onSkinColorDetected: ((UIColor) -> Void)?
     
     class Coordinator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         var parent: CameraViewController
         var session: AVCaptureSession
+        var previewLayer: AVCaptureVideoPreviewLayer!
         var capturedColors: [UIColor] = []
         lazy var faceDetectionRequest: VNDetectFaceRectanglesRequest = {
             return VNDetectFaceRectanglesRequest(completionHandler: self.handleFaceDetection)
@@ -73,11 +75,15 @@ struct CameraViewController: UIViewControllerRepresentable {
             if let faceObservation = (faceDetectionRequest.results)?.first {
                 DispatchQueue.main.async {
                     self.parent.faceDetected = true
+                    if let previewLayer = self.previewLayer {
+                        self.parent.faceBoundaries = self.convertBoundingBox(faceObservation.boundingBox, to: previewLayer.bounds.size)
+                    }
                     self.delayExtractSkinColor(sampleBuffer, faceObservation: faceObservation)
                 }
             } else {
                 DispatchQueue.main.async {
                     self.parent.faceDetected = false
+                    self.parent.faceBoundaries = nil
                 }
             }
         }
@@ -86,17 +92,21 @@ struct CameraViewController: UIViewControllerRepresentable {
             guard let results = request.results as? [VNFaceObservation], let faceObservation = results.first else {
                 DispatchQueue.main.async {
                     self.parent.faceDetected = false
+                    self.parent.faceBoundaries = nil
                 }
                 return
             }
             
             DispatchQueue.main.async {
                 self.parent.faceDetected = true
+                if let previewLayer = self.previewLayer {
+                    self.parent.faceBoundaries = self.convertBoundingBox(faceObservation.boundingBox, to: previewLayer.bounds.size)
+                }
             }
         }
         
         private func delayExtractSkinColor(_ sampleBuffer: CMSampleBuffer, faceObservation: VNFaceObservation) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 self.extractSkinColor(from: sampleBuffer, faceObservation: faceObservation)
             }
         }
@@ -166,6 +176,14 @@ struct CameraViewController: UIViewControllerRepresentable {
             let count = CGFloat(colors.count)
             return UIColor(red: red / count, green: green / count, blue: blue / count, alpha: alpha / count)
         }
+        
+        private func convertBoundingBox(_ boundingBox: CGRect, to size: CGSize) -> CGRect {
+            let width = boundingBox.width * size.width
+            let height = boundingBox.height * size.height
+            let x = boundingBox.origin.x * size.width
+            let y = (1 - boundingBox.origin.y - boundingBox.height) * size.height
+            return CGRect(x: x, y: y, width: width, height: height)
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -178,6 +196,7 @@ struct CameraViewController: UIViewControllerRepresentable {
         // Add the preview layer
         let previewLayer = AVCaptureVideoPreviewLayer(session: context.coordinator.session)
         previewLayer.videoGravity = .resizeAspectFill
+        context.coordinator.previewLayer = previewLayer
         controller.view.layer.addSublayer(previewLayer)
         
         DispatchQueue.main.async {
