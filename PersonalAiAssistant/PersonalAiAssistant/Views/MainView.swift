@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAuth
 
 struct MainView: View {
     @State private var showCameraView = false
@@ -34,12 +35,11 @@ struct MainView: View {
                     .foregroundColor(.white)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(detectedSkinColor == .clear ? Color.blue : Color.gray)
+                    .background(Color.blue)
                     .cornerRadius(10)
                     .shadow(radius: 10)
             }
             .padding(.horizontal)
-            .disabled(detectedSkinColor != .clear)
             .sheet(isPresented: $showCameraView) {
                 CameraView(onSkinColorDetected: { color in
                     self.detectedSkinColor = color
@@ -61,12 +61,41 @@ struct MainView: View {
             }
 
             Spacer()
+            
+            Button(action: signOut) {
+                Text("Sign Out")
+                    .font(.custom("YourCustomFont-SemiBold", size: 20))
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.red)
+                    .cornerRadius(10)
+                    .shadow(radius: 10)
+            }
+            .padding(.horizontal)
+            
+            Spacer()
         }
         .padding()
         .background(
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.3), Color.white]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
         )
+    }
+    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            // Navigate to SignInView
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                if let window = windowScene.windows.first {
+                    window.rootViewController = UIHostingController(rootView: SignInView())
+                    window.makeKeyAndVisible()
+                }
+            }
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
     }
 }
 

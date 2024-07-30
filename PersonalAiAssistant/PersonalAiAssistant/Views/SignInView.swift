@@ -1,13 +1,18 @@
 import SwiftUI
 import FirebaseAuth
 
+enum NavigationPath: Hashable {
+    case mainView
+}
+
 struct SignInView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage: String?
+    @State private var navigationPath: [NavigationPath] = []  // State variable to control navigation
 
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $navigationPath) {
             VStack {
                 Spacer()
                 
@@ -59,11 +64,9 @@ struct SignInView: View {
                 .padding(.horizontal)
                 .padding(.top, 20)
                 
-                NavigationLink(destination: SignUpView()) {
-                    Text("Don't have an account? Sign Up")
-                        .font(.custom("YourCustomFont-Regular", size: 18))
-                        .padding(.top, 20)
-                }
+                NavigationLink("Don't have an account? Sign Up", value: NavigationPath.mainView)
+                    .font(.custom("YourCustomFont-Regular", size: 18))
+                    .padding(.top, 20)
                 
                 Spacer()
             }
@@ -72,6 +75,12 @@ struct SignInView: View {
                 LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.3), Color.white]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
             )
+            .navigationDestination(for: NavigationPath.self) { path in
+                switch path {
+                case .mainView:
+                    MainView()
+                }
+            }
         }
     }
 
@@ -81,7 +90,7 @@ struct SignInView: View {
                 self.errorMessage = error.localizedDescription
             } else {
                 self.errorMessage = nil
-                // Navigate to the main content view
+                navigationPath.append(.mainView)  // Navigate to MainView
             }
         }
     }

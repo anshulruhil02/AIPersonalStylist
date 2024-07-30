@@ -15,7 +15,6 @@
 		F36B12022C57FAED00D9D063 /* PersonalAiAssistantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B12012C57FAED00D9D063 /* PersonalAiAssistantUITests.swift */; };
 		F36B12042C57FAED00D9D063 /* PersonalAiAssistantUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B12032C57FAED00D9D063 /* PersonalAiAssistantUITestsLaunchTests.swift */; };
 		F36B12112C58088400D9D063 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F36B12102C58088400D9D063 /* GoogleService-Info.plist */; };
-		F36B121F2C580F7A00D9D063 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B121E2C580F7A00D9D063 /* FirebaseService.swift */; };
 		F36B12222C58104000D9D063 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B12212C58104000D9D063 /* SignInView.swift */; };
 		F36B12242C58106200D9D063 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B12232C58106200D9D063 /* SignUpView.swift */; };
 		F36B12262C58108900D9D063 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B12252C58108900D9D063 /* MainView.swift */; };
@@ -59,7 +58,6 @@
 		F36B12012C57FAED00D9D063 /* PersonalAiAssistantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAiAssistantUITests.swift; sourceTree = "<group>"; };
 		F36B12032C57FAED00D9D063 /* PersonalAiAssistantUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAiAssistantUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F36B12102C58088400D9D063 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F36B121E2C580F7A00D9D063 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		F36B12212C58104000D9D063 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		F36B12232C58106200D9D063 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		F36B12252C58108900D9D063 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -199,7 +197,6 @@
 		F36B121D2C580F5F00D9D063 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				F36B121E2C580F7A00D9D063 /* FirebaseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -361,7 +358,6 @@
 				F3E2A7382C58CF4D0058E98B /* FaceDetectionOverlay.swift in Sources */,
 				F36B11E62C57FAEB00D9D063 /* PersonalAiAssistantApp.swift in Sources */,
 				F36B12222C58104000D9D063 /* SignInView.swift in Sources */,
-				F36B121F2C580F7A00D9D063 /* FirebaseService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@ struct CameraViewController: UIViewControllerRepresentable {
     class Coordinator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         var parent: CameraViewController
         var session: AVCaptureSession
+        var capturedColors: [UIColor] = []
         lazy var faceDetectionRequest: VNDetectFaceRectanglesRequest = {
             return VNDetectFaceRectanglesRequest(completionHandler: self.handleFaceDetection)
         }()
@@ -50,6 +51,7 @@ struct CameraViewController: UIViewControllerRepresentable {
         }
         
         func startRunning() {
+            capturedColors.removeAll()
             session.startRunning()
         }
         
@@ -71,7 +73,7 @@ struct CameraViewController: UIViewControllerRepresentable {
             if let faceObservation = (faceDetectionRequest.results)?.first {
                 DispatchQueue.main.async {
                     self.parent.faceDetected = true
-                    self.extractSkinColor(from: sampleBuffer, faceObservation: faceObservation)
+                    self.delayExtractSkinColor(sampleBuffer, faceObservation: faceObservation)
                 }
             } else {
                 DispatchQueue.main.async {
@@ -93,6 +95,12 @@ struct CameraViewController: UIViewControllerRepresentable {
             }
         }
         
+        private func delayExtractSkinColor(_ sampleBuffer: CMSampleBuffer, faceObservation: VNFaceObservation) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+                self.extractSkinColor(from: sampleBuffer, faceObservation: faceObservation)
+            }
+        }
+        
         private func extractSkinColor(from sampleBuffer: CMSampleBuffer, faceObservation: VNFaceObservation) {
             guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
             
@@ -107,9 +115,16 @@ struct CameraViewController: UIViewControllerRepresentable {
             )
             
             let color = getColorFromCIImage(ciImage, at: centerPoint)
-            DispatchQueue.main.async {
-                self.parent.skinColor = color
-                self.parent.onSkinColorDetected?(color)  // Call the closure with the detected skin color
+            capturedColors.append(color)
+            
+            // Capture colors for 3 seconds and then calculate the average color
+            if capturedColors.count >= 10 {  // Assuming we capture 10 frames within 3 seconds
+                let averageColor = averageColor(from: capturedColors)
+                DispatchQueue.main.async {
+                    self.parent.skinColor = averageColor
+                    self.parent.onSkinColorDetected?(averageColor)
+                    self.stopRunning()  // Stop the session to prevent further updates
+                }
             }
         }
         
@@ -127,6 +142,29 @@ struct CameraViewController: UIViewControllerRepresentable {
             let a = CGFloat(ptr[3]) / 255.0
             
             return UIColor(red: r, green: g, blue: b, alpha: a)
+        }
+        
+        private func averageColor(from colors: [UIColor]) -> UIColor {
+            var red: CGFloat = 0
+            var green: CGFloat = 0
+            var blue: CGFloat = 0
+            var alpha: CGFloat = 0
+            
+            for color in colors {
+                var r: CGFloat = 0
+                var g: CGFloat = 0
+                var b: CGFloat = 0
+                var a: CGFloat = 0
+                color.getRed(&r, green: &g, blue: &b, alpha: &a)
+                
+                red += r
+                green += g
+                blue += b
+                alpha += a
+            }
+            
+            let count = CGFloat(colors.count)
+            return UIColor(red: red / count, green: green / count, blue: blue / count, alpha: alpha / count)
         }
     }
     
