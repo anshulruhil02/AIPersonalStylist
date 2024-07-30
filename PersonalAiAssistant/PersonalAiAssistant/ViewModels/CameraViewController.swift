@@ -68,7 +68,7 @@ struct CameraViewController: UIViewControllerRepresentable {
             }
 
             // Check if a face was detected and process the frame
-            if let faceObservation = (faceDetectionRequest.results as? [VNFaceObservation])?.first {
+            if let faceObservation = (faceDetectionRequest.results)?.first {
                 DispatchQueue.main.async {
                     self.parent.faceDetected = true
                     self.extractSkinColor(from: sampleBuffer, faceObservation: faceObservation)
@@ -101,28 +101,32 @@ struct CameraViewController: UIViewControllerRepresentable {
             let height = ciImage.extent.height
             
             let boundingBox = faceObservation.boundingBox
-            let faceRect = CGRect(
-                x: boundingBox.origin.x * width,
-                y: boundingBox.origin.y * height,
-                width: boundingBox.size.width * width,
-                height: boundingBox.size.height * height
+            let centerPoint = CGPoint(
+                x: boundingBox.midX * width,
+                y: boundingBox.midY * height
             )
             
-            let faceImage = ciImage.cropped(to: faceRect)
-            detectSkinColor(in: faceImage)
+            let color = getColorFromCIImage(ciImage, at: centerPoint)
+            DispatchQueue.main.async {
+                self.parent.skinColor = color
+                self.parent.onSkinColorDetected?(color)  // Call the closure with the detected skin color
+            }
         }
         
-        private func detectSkinColor(in image: CIImage) {
+        private func getColorFromCIImage(_ image: CIImage, at point: CGPoint) -> UIColor {
             let context = CIContext()
-            guard let cgImage = context.createCGImage(image, from: image.extent) else { return }
-            
-            let bitmap = Bitmap(image: cgImage)
-            let skinColor = bitmap.predominantColor()
-            
-            DispatchQueue.main.async {
-                self.parent.skinColor = skinColor
-                self.parent.onSkinColorDetected?(skinColor)  // Call the closure with the detected skin color
+            let pixel = context.createCGImage(image, from: CGRect(origin: point, size: CGSize(width: 1, height: 1)))
+            guard let data = pixel?.dataProvider?.data,
+                  let ptr = CFDataGetBytePtr(data) else {
+                return UIColor.clear
             }
+            
+            let r = CGFloat(ptr[0]) / 255.0
+            let g = CGFloat(ptr[1]) / 255.0
+            let b = CGFloat(ptr[2]) / 255.0
+            let a = CGFloat(ptr[3]) / 255.0
+            
+            return UIColor(red: r, green: g, blue: b, alpha: a)
         }
     }
     

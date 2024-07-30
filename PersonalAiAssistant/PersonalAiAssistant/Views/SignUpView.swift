@@ -1,10 +1,3 @@
-//
-//  SignUpView.swift
-//  PersonalAiAssistant
-//
-//  Created by Anshul Ruhil on 2024-07-29.
-//
-
 import SwiftUI
 import FirebaseAuth
 
@@ -16,35 +9,70 @@ struct SignUpView: View {
 
     var body: some View {
         VStack {
-            TextField("Email", text: $email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            Spacer()
+            
+            Image("appLogo")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 150)
                 .padding()
-
-            SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
+            Text("Sign Up")
+                .font(.custom("YourCustomFont-Bold", size: 34))
                 .padding()
-
-            SecureField("Confirm Password", text: $confirmPassword)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
+            
+            VStack(spacing: 20) {
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
+                
+                SecureField("Confirm Password", text: $confirmPassword)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
+            }
+            .padding(.horizontal)
+            
             if let errorMessage = errorMessage {
                 Text(errorMessage)
                     .foregroundColor(.red)
                     .padding()
             }
-
+            
             Button(action: signUp) {
                 Text("Sign Up")
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
+                    .font(.custom("YourCustomFont-SemiBold", size: 20))
                     .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
                     .cornerRadius(10)
+                    .shadow(radius: 10)
             }
-            .padding()
+            .padding(.horizontal)
+            .padding(.top, 20)
+            
+            Spacer()
         }
         .padding()
+        .background(
+            LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.3), Color.white]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
+        )
     }
 
     func signUp() {
@@ -61,5 +89,11 @@ struct SignUpView: View {
                 // Navigate to the main content view
             }
         }
+    }
+}
+
+struct SignUpView_Previews: PreviewProvider {
+    static var previews: some View {
+        SignUpView()
     }
 }
