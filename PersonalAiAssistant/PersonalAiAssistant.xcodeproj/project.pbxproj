@@ -1,0 +1,759 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F36B11E62C57FAEB00D9D063 /* PersonalAiAssistantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B11E52C57FAEB00D9D063 /* PersonalAiAssistantApp.swift */; };
+		F36B11E82C57FAEB00D9D063 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B11E72C57FAEB00D9D063 /* ContentView.swift */; };
+		F36B11EA2C57FAEC00D9D063 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F36B11E92C57FAEC00D9D063 /* Assets.xcassets */; };
+		F36B11EE2C57FAEC00D9D063 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F36B11ED2C57FAEC00D9D063 /* Preview Assets.xcassets */; };
+		F36B11F82C57FAED00D9D063 /* PersonalAiAssistantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B11F72C57FAED00D9D063 /* PersonalAiAssistantTests.swift */; };
+		F36B12022C57FAED00D9D063 /* PersonalAiAssistantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B12012C57FAED00D9D063 /* PersonalAiAssistantUITests.swift */; };
+		F36B12042C57FAED00D9D063 /* PersonalAiAssistantUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B12032C57FAED00D9D063 /* PersonalAiAssistantUITestsLaunchTests.swift */; };
+		F36B12112C58088400D9D063 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F36B12102C58088400D9D063 /* GoogleService-Info.plist */; };
+		F36B121F2C580F7A00D9D063 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B121E2C580F7A00D9D063 /* FirebaseService.swift */; };
+		F36B12222C58104000D9D063 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B12212C58104000D9D063 /* SignInView.swift */; };
+		F36B12242C58106200D9D063 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B12232C58106200D9D063 /* SignUpView.swift */; };
+		F36B12262C58108900D9D063 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B12252C58108900D9D063 /* MainView.swift */; };
+		F3B20F802C5814AA00C5F9A2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F3B20F7F2C5814AA00C5F9A2 /* FirebaseAnalytics */; };
+		F3B20F822C5814AA00C5F9A2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F3B20F812C5814AA00C5F9A2 /* FirebaseAuth */; };
+		F3B20F842C5814AA00C5F9A2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F3B20F832C5814AA00C5F9A2 /* FirebaseFirestore */; };
+		F3B20F862C5814AA00C5F9A2 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F3B20F852C5814AA00C5F9A2 /* FirebaseStorage */; };
+		F3B20FA62C586E0900C5F9A2 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B20FA52C586E0900C5F9A2 /* CameraView.swift */; };
+		F3B210662C58BF7200C5F9A2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B210652C58BF7200C5F9A2 /* CameraViewController.swift */; };
+		F3E2A7382C58CF4D0058E98B /* FaceDetectionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2A7372C58CF4D0058E98B /* FaceDetectionOverlay.swift */; };
+		F3E2A73A2C58D8F30058E98B /* Bitmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2A7392C58D8F30058E98B /* Bitmap.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F36B11F42C57FAED00D9D063 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F36B11DA2C57FAEB00D9D063 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F36B11E12C57FAEB00D9D063;
+			remoteInfo = PersonalAiAssistant;
+		};
+		F36B11FE2C57FAED00D9D063 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F36B11DA2C57FAEB00D9D063 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F36B11E12C57FAEB00D9D063;
+			remoteInfo = PersonalAiAssistant;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F36B11E22C57FAEB00D9D063 /* PersonalAiAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonalAiAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F36B11E52C57FAEB00D9D063 /* PersonalAiAssistantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAiAssistantApp.swift; sourceTree = "<group>"; };
+		F36B11E72C57FAEB00D9D063 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F36B11E92C57FAEC00D9D063 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F36B11EB2C57FAEC00D9D063 /* PersonalAiAssistant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PersonalAiAssistant.entitlements; sourceTree = "<group>"; };
+		F36B11ED2C57FAEC00D9D063 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F36B11F32C57FAED00D9D063 /* PersonalAiAssistantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersonalAiAssistantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F36B11F72C57FAED00D9D063 /* PersonalAiAssistantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAiAssistantTests.swift; sourceTree = "<group>"; };
+		F36B11FD2C57FAED00D9D063 /* PersonalAiAssistantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersonalAiAssistantUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F36B12012C57FAED00D9D063 /* PersonalAiAssistantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAiAssistantUITests.swift; sourceTree = "<group>"; };
+		F36B12032C57FAED00D9D063 /* PersonalAiAssistantUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAiAssistantUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F36B12102C58088400D9D063 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F36B121E2C580F7A00D9D063 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		F36B12212C58104000D9D063 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		F36B12232C58106200D9D063 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		F36B12252C58108900D9D063 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		F3B20FA52C586E0900C5F9A2 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		F3B210652C58BF7200C5F9A2 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		F3E2A7372C58CF4D0058E98B /* FaceDetectionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionOverlay.swift; sourceTree = "<group>"; };
+		F3E2A7392C58D8F30058E98B /* Bitmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F36B11DF2C57FAEB00D9D063 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3B20F802C5814AA00C5F9A2 /* FirebaseAnalytics in Frameworks */,
+				F3B20F862C5814AA00C5F9A2 /* FirebaseStorage in Frameworks */,
+				F3B20F822C5814AA00C5F9A2 /* FirebaseAuth in Frameworks */,
+				F3B20F842C5814AA00C5F9A2 /* FirebaseFirestore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F36B11F02C57FAED00D9D063 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F36B11FA2C57FAED00D9D063 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F36B11D92C57FAEB00D9D063 = {
+			isa = PBXGroup;
+			children = (
+				F36B12102C58088400D9D063 /* GoogleService-Info.plist */,
+				F36B11E42C57FAEB00D9D063 /* PersonalAiAssistant */,
+				F36B11F62C57FAED00D9D063 /* PersonalAiAssistantTests */,
+				F36B12002C57FAED00D9D063 /* PersonalAiAssistantUITests */,
+				F36B11E32C57FAEB00D9D063 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F36B11E32C57FAEB00D9D063 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F36B11E22C57FAEB00D9D063 /* PersonalAiAssistant.app */,
+				F36B11F32C57FAED00D9D063 /* PersonalAiAssistantTests.xctest */,
+				F36B11FD2C57FAED00D9D063 /* PersonalAiAssistantUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F36B11E42C57FAEB00D9D063 /* PersonalAiAssistant */ = {
+			isa = PBXGroup;
+			children = (
+				F36B12202C580F8200D9D063 /* Resources */,
+				F36B121D2C580F5F00D9D063 /* Services */,
+				F36B121C2C580F5700D9D063 /* ViewModels */,
+				F36B121B2C580F4E00D9D063 /* Models */,
+				F36B121A2C580F1B00D9D063 /* Views */,
+				F36B12172C580EDD00D9D063 /* App */,
+				F36B11EB2C57FAEC00D9D063 /* PersonalAiAssistant.entitlements */,
+				F36B11EC2C57FAEC00D9D063 /* Preview Content */,
+			);
+			path = PersonalAiAssistant;
+			sourceTree = "<group>";
+		};
+		F36B11EC2C57FAEC00D9D063 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F36B11ED2C57FAEC00D9D063 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F36B11F62C57FAED00D9D063 /* PersonalAiAssistantTests */ = {
+			isa = PBXGroup;
+			children = (
+				F36B11F72C57FAED00D9D063 /* PersonalAiAssistantTests.swift */,
+			);
+			path = PersonalAiAssistantTests;
+			sourceTree = "<group>";
+		};
+		F36B12002C57FAED00D9D063 /* PersonalAiAssistantUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F36B12012C57FAED00D9D063 /* PersonalAiAssistantUITests.swift */,
+				F36B12032C57FAED00D9D063 /* PersonalAiAssistantUITestsLaunchTests.swift */,
+			);
+			path = PersonalAiAssistantUITests;
+			sourceTree = "<group>";
+		};
+		F36B12172C580EDD00D9D063 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F36B11E52C57FAEB00D9D063 /* PersonalAiAssistantApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F36B121A2C580F1B00D9D063 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F36B11E72C57FAEB00D9D063 /* ContentView.swift */,
+				F36B12212C58104000D9D063 /* SignInView.swift */,
+				F36B12232C58106200D9D063 /* SignUpView.swift */,
+				F36B12252C58108900D9D063 /* MainView.swift */,
+				F3B20FA52C586E0900C5F9A2 /* CameraView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F36B121B2C580F4E00D9D063 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F36B121C2C580F5700D9D063 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F3B210652C58BF7200C5F9A2 /* CameraViewController.swift */,
+				F3E2A7372C58CF4D0058E98B /* FaceDetectionOverlay.swift */,
+				F3E2A7392C58D8F30058E98B /* Bitmap.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F36B121D2C580F5F00D9D063 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F36B121E2C580F7A00D9D063 /* FirebaseService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F36B12202C580F8200D9D063 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F36B11E92C57FAEC00D9D063 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F36B11E12C57FAEB00D9D063 /* PersonalAiAssistant */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F36B12072C57FAED00D9D063 /* Build configuration list for PBXNativeTarget "PersonalAiAssistant" */;
+			buildPhases = (
+				F36B11DE2C57FAEB00D9D063 /* Sources */,
+				F36B11DF2C57FAEB00D9D063 /* Frameworks */,
+				F36B11E02C57FAEB00D9D063 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PersonalAiAssistant;
+			packageProductDependencies = (
+				F3B20F7F2C5814AA00C5F9A2 /* FirebaseAnalytics */,
+				F3B20F812C5814AA00C5F9A2 /* FirebaseAuth */,
+				F3B20F832C5814AA00C5F9A2 /* FirebaseFirestore */,
+				F3B20F852C5814AA00C5F9A2 /* FirebaseStorage */,
+			);
+			productName = PersonalAiAssistant;
+			productReference = F36B11E22C57FAEB00D9D063 /* PersonalAiAssistant.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F36B11F22C57FAED00D9D063 /* PersonalAiAssistantTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F36B120A2C57FAED00D9D063 /* Build configuration list for PBXNativeTarget "PersonalAiAssistantTests" */;
+			buildPhases = (
+				F36B11EF2C57FAED00D9D063 /* Sources */,
+				F36B11F02C57FAED00D9D063 /* Frameworks */,
+				F36B11F12C57FAED00D9D063 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F36B11F52C57FAED00D9D063 /* PBXTargetDependency */,
+			);
+			name = PersonalAiAssistantTests;
+			productName = PersonalAiAssistantTests;
+			productReference = F36B11F32C57FAED00D9D063 /* PersonalAiAssistantTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F36B11FC2C57FAED00D9D063 /* PersonalAiAssistantUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F36B120D2C57FAED00D9D063 /* Build configuration list for PBXNativeTarget "PersonalAiAssistantUITests" */;
+			buildPhases = (
+				F36B11F92C57FAED00D9D063 /* Sources */,
+				F36B11FA2C57FAED00D9D063 /* Frameworks */,
+				F36B11FB2C57FAED00D9D063 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F36B11FF2C57FAED00D9D063 /* PBXTargetDependency */,
+			);
+			name = PersonalAiAssistantUITests;
+			productName = PersonalAiAssistantUITests;
+			productReference = F36B11FD2C57FAED00D9D063 /* PersonalAiAssistantUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F36B11DA2C57FAEB00D9D063 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					F36B11E12C57FAEB00D9D063 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					F36B11F22C57FAED00D9D063 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = F36B11E12C57FAEB00D9D063;
+					};
+					F36B11FC2C57FAED00D9D063 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = F36B11E12C57FAEB00D9D063;
+					};
+				};
+			};
+			buildConfigurationList = F36B11DD2C57FAEB00D9D063 /* Build configuration list for PBXProject "PersonalAiAssistant" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F36B11D92C57FAEB00D9D063;
+			packageReferences = (
+				F3B20F7E2C5814AA00C5F9A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = F36B11E32C57FAEB00D9D063 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F36B11E12C57FAEB00D9D063 /* PersonalAiAssistant */,
+				F36B11F22C57FAED00D9D063 /* PersonalAiAssistantTests */,
+				F36B11FC2C57FAED00D9D063 /* PersonalAiAssistantUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F36B11E02C57FAEB00D9D063 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F36B12112C58088400D9D063 /* GoogleService-Info.plist in Resources */,
+				F36B11EE2C57FAEC00D9D063 /* Preview Assets.xcassets in Resources */,
+				F36B11EA2C57FAEC00D9D063 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F36B11F12C57FAED00D9D063 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F36B11FB2C57FAED00D9D063 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F36B11DE2C57FAEB00D9D063 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3B210662C58BF7200C5F9A2 /* CameraViewController.swift in Sources */,
+				F36B11E82C57FAEB00D9D063 /* ContentView.swift in Sources */,
+				F36B12262C58108900D9D063 /* MainView.swift in Sources */,
+				F3B20FA62C586E0900C5F9A2 /* CameraView.swift in Sources */,
+				F3E2A73A2C58D8F30058E98B /* Bitmap.swift in Sources */,
+				F36B12242C58106200D9D063 /* SignUpView.swift in Sources */,
+				F3E2A7382C58CF4D0058E98B /* FaceDetectionOverlay.swift in Sources */,
+				F36B11E62C57FAEB00D9D063 /* PersonalAiAssistantApp.swift in Sources */,
+				F36B12222C58104000D9D063 /* SignInView.swift in Sources */,
+				F36B121F2C580F7A00D9D063 /* FirebaseService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F36B11EF2C57FAED00D9D063 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F36B11F82C57FAED00D9D063 /* PersonalAiAssistantTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F36B11F92C57FAED00D9D063 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F36B12022C57FAED00D9D063 /* PersonalAiAssistantUITests.swift in Sources */,
+				F36B12042C57FAED00D9D063 /* PersonalAiAssistantUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F36B11F52C57FAED00D9D063 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F36B11E12C57FAEB00D9D063 /* PersonalAiAssistant */;
+			targetProxy = F36B11F42C57FAED00D9D063 /* PBXContainerItemProxy */;
+		};
+		F36B11FF2C57FAED00D9D063 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F36B11E12C57FAEB00D9D063 /* PersonalAiAssistant */;
+			targetProxy = F36B11FE2C57FAED00D9D063 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F36B12052C57FAED00D9D063 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F36B12062C57FAED00D9D063 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		F36B12082C57FAED00D9D063 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PersonalAiAssistant/PersonalAiAssistant.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PersonalAiAssistant/Preview Content\"";
+				DEVELOPMENT_TEAM = TPSDBQUPSC;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera use to detect skin color";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anshulruhil.iExpense.PersonalAiAssistant;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F36B12092C57FAED00D9D063 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PersonalAiAssistant/PersonalAiAssistant.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PersonalAiAssistant/Preview Content\"";
+				DEVELOPMENT_TEAM = TPSDBQUPSC;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera use to detect skin color";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anshulruhil.iExpense.PersonalAiAssistant;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F36B120B2C57FAED00D9D063 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TPSDBQUPSC;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anshulruhil.iExpense.PersonalAiAssistantTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PersonalAiAssistant.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PersonalAiAssistant";
+			};
+			name = Debug;
+		};
+		F36B120C2C57FAED00D9D063 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TPSDBQUPSC;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anshulruhil.iExpense.PersonalAiAssistantTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PersonalAiAssistant.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PersonalAiAssistant";
+			};
+			name = Release;
+		};
+		F36B120E2C57FAED00D9D063 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TPSDBQUPSC;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anshulruhil.iExpense.PersonalAiAssistantUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PersonalAiAssistant;
+			};
+			name = Debug;
+		};
+		F36B120F2C57FAED00D9D063 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TPSDBQUPSC;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anshulruhil.iExpense.PersonalAiAssistantUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PersonalAiAssistant;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F36B11DD2C57FAEB00D9D063 /* Build configuration list for PBXProject "PersonalAiAssistant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F36B12052C57FAED00D9D063 /* Debug */,
+				F36B12062C57FAED00D9D063 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F36B12072C57FAED00D9D063 /* Build configuration list for PBXNativeTarget "PersonalAiAssistant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F36B12082C57FAED00D9D063 /* Debug */,
+				F36B12092C57FAED00D9D063 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F36B120A2C57FAED00D9D063 /* Build configuration list for PBXNativeTarget "PersonalAiAssistantTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F36B120B2C57FAED00D9D063 /* Debug */,
+				F36B120C2C57FAED00D9D063 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F36B120D2C57FAED00D9D063 /* Build configuration list for PBXNativeTarget "PersonalAiAssistantUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F36B120E2C57FAED00D9D063 /* Debug */,
+				F36B120F2C57FAED00D9D063 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F3B20F7E2C5814AA00C5F9A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.29.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F3B20F7F2C5814AA00C5F9A2 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3B20F7E2C5814AA00C5F9A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		F3B20F812C5814AA00C5F9A2 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3B20F7E2C5814AA00C5F9A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		F3B20F832C5814AA00C5F9A2 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3B20F7E2C5814AA00C5F9A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		F3B20F852C5814AA00C5F9A2 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3B20F7E2C5814AA00C5F9A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F36B11DA2C57FAEB00D9D063 /* Project object */;
+}
