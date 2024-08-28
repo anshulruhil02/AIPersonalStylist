@@ -1,9 +1,11 @@
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
 
 struct MainView: View {
     @State private var showCameraView = false
     @State private var detectedSkinColor: UIColor = .clear
+    var email: String
 
     var body: some View {
         VStack {
@@ -43,6 +45,7 @@ struct MainView: View {
             .sheet(isPresented: $showCameraView) {
                 CameraView(onSkinColorDetected: { color in
                     self.detectedSkinColor = color
+                    self.storeSkinColor(color)  // Store the detected color
                     self.showCameraView = false
                 })
             }
@@ -61,20 +64,24 @@ struct MainView: View {
             }
 
             Spacer()
-            
-            Button(action: signOut) {
-                Text("Sign Out")
-                    .font(.custom("YourCustomFont-SemiBold", size: 20))
-                    .foregroundColor(.white)
+
+            // Footer Navigation Area
+            HStack {
+                Spacer()
+                
+                NavigationLink(destination: UserProfileView()) {
+                    VStack {
+                        Image(systemName: "person.circle.fill")
+                            .font(.system(size: 24))
+                        Text("Profile")
+                    }
                     .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.red)
-                    .cornerRadius(10)
-                    .shadow(radius: 10)
+                }
+                
+                Spacer()
             }
-            .padding(.horizontal)
-            
-            Spacer()
+            .frame(height: 50)
+            .background(Color.white.shadow(radius: 5))
         }
         .padding()
         .background(
@@ -82,7 +89,7 @@ struct MainView: View {
                 .edgesIgnoringSafeArea(.all)
         )
     }
-    
+
     func signOut() {
         do {
             try Auth.auth().signOut()
@@ -97,10 +104,46 @@ struct MainView: View {
             print("Error signing out: %@", signOutError)
         }
     }
+
+    func storeSkinColor(_ color: UIColor) {
+        // Extract RGB components from UIColor
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        // Normalize the RGB values to 0-255 range
+        let rgbValues = [
+            "Red": Int(red * 255.0),
+            "Green": Int(green * 255.0),
+            "Blue": Int(blue * 255.0)
+        ]
+        
+        // Get the current user ID
+        guard let userUID = Auth.auth().currentUser?.uid else { return }
+        
+        // Get a reference to Firestore
+        let db = Firestore.firestore()
+        
+        // Update the existing user document with RGB values
+        db.collection("UserDetails").document(userUID).updateData([
+            "Red": rgbValues["Red"] ?? 0,
+            "Green": rgbValues["Green"] ?? 0,
+            "Blue": rgbValues["Blue"] ?? 0
+        ]) { error in
+            if let error = error {
+                print("Error updating document: \(error)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
 }
+
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(email: "example@example.com")
     }
 }

@@ -79,7 +79,7 @@ struct SignInView: View {
             .navigationDestination(for: NavigationPath.self) { path in
                 switch path {
                 case .mainView:
-                    MainView()
+                    MainView(email: email)  // Pass the email to MainView
                 case .signUpView:
                     SignUpView()
                 }

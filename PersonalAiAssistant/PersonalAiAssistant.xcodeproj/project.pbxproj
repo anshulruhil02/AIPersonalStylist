@@ -24,6 +24,7 @@
 		F3B20F862C5814AA00C5F9A2 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F3B20F852C5814AA00C5F9A2 /* FirebaseStorage */; };
 		F3B20FA62C586E0900C5F9A2 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B20FA52C586E0900C5F9A2 /* CameraView.swift */; };
 		F3B210662C58BF7200C5F9A2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B210652C58BF7200C5F9A2 /* CameraViewController.swift */; };
+		F3C8CDF72C7E3C4D00E88A47 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C8CDF62C7E3C4D00E88A47 /* UserProfileView.swift */; };
 		F3E2A7382C58CF4D0058E98B /* FaceDetectionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2A7372C58CF4D0058E98B /* FaceDetectionOverlay.swift */; };
 		F3E2A73A2C58D8F30058E98B /* Bitmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2A7392C58D8F30058E98B /* Bitmap.swift */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,7 @@
 		F36B12252C58108900D9D063 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F3B20FA52C586E0900C5F9A2 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		F3B210652C58BF7200C5F9A2 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		F3C8CDF62C7E3C4D00E88A47 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F3E2A7372C58CF4D0058E98B /* FaceDetectionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionOverlay.swift; sourceTree = "<group>"; };
 		F3E2A7392C58D8F30058E98B /* Bitmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +175,7 @@
 				F36B12232C58106200D9D063 /* SignUpView.swift */,
 				F36B12252C58108900D9D063 /* MainView.swift */,
 				F3B20FA52C586E0900C5F9A2 /* CameraView.swift */,
+				F3C8CDF62C7E3C4D00E88A47 /* UserProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				F36B12262C58108900D9D063 /* MainView.swift in Sources */,
 				F3B20FA62C586E0900C5F9A2 /* CameraView.swift in Sources */,
 				F3E2A73A2C58D8F30058E98B /* Bitmap.swift in Sources */,
+				F3C8CDF72C7E3C4D00E88A47 /* UserProfileView.swift in Sources */,
 				F36B12242C58106200D9D063 /* SignUpView.swift in Sources */,
 				F3E2A7382C58CF4D0058E98B /* FaceDetectionOverlay.swift in Sources */,
 				F36B11E62C57FAEB00D9D063 /* PersonalAiAssistantApp.swift in Sources */,
