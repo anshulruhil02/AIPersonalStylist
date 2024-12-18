@@ -56,7 +56,9 @@ struct CameraViewController: UIViewControllerRepresentable {
         
         func startRunning() {
             capturedColors.removeAll()
-            session.startRunning()
+            DispatchQueue.global(qos: .background).async {
+                self.session.startRunning()
+            }
         }
         
         func stopRunning() {
