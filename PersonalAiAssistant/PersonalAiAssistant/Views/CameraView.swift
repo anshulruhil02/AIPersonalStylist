@@ -8,11 +8,8 @@ struct CameraView: View {
 
     var body: some View {
         ZStack {
-            CameraViewController(faceDetected: $faceDetected, faceBoundaries: $faceBoundaries, skinColor: $skinColor, onSkinColorDetected: onSkinColorDetected)
+            CameraViewController()
                 .edgesIgnoringSafeArea(.all)
-            
-//            FaceDetectionOverlay(faceBoundaries: faceBoundaries)
-//                .edgesIgnoringSafeArea(.all)
         }
     }
 }

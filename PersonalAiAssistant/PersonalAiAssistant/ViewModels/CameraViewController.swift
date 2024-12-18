@@ -3,11 +3,7 @@ import AVFoundation
 import Vision
 
 struct CameraViewController: UIViewControllerRepresentable {
-    @Binding var faceDetected: Bool
-    @Binding var faceBoundaries: CGRect?
-    @Binding var skinColor: UIColor
     var overlayLayer: CALayer? = CALayer()
-    var onSkinColorDetected: ((UIColor) -> Void)?
     
     class Coordinator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         var parent: CameraViewController
@@ -15,9 +11,6 @@ struct CameraViewController: UIViewControllerRepresentable {
         var previewLayer: AVCaptureVideoPreviewLayer!
         var overlayLayer: CALayer!
         var capturedColors: [UIColor] = []
-        lazy var faceDetectionRequest: VNDetectFaceRectanglesRequest = {
-            return VNDetectFaceRectanglesRequest(completionHandler: self.handleFaceDetection)
-        }()
         
         init(parent: CameraViewController) {
             self.parent = parent
@@ -135,7 +128,6 @@ struct CameraViewController: UIViewControllerRepresentable {
 
             }
 
-
             // Define skeletal connections
             let connections: [(VNHumanBodyPoseObservation.JointName, VNHumanBodyPoseObservation.JointName)] = [
                 (.neck, .leftShoulder), (.neck, .rightShoulder),
@@ -146,7 +138,6 @@ struct CameraViewController: UIViewControllerRepresentable {
                 (.leftHip, .leftKnee), (.rightHip, .rightKnee),
                 (.leftKnee, .leftAnkle), (.rightKnee, .rightAnkle),
             ]
-
             
             // Draw lines for connections
             for (startJoint, endJoint) in connections {
@@ -154,11 +145,8 @@ struct CameraViewController: UIViewControllerRepresentable {
                     drawLine(from: start, to: end)
                 }
             }
-            
-            
         }
 
-        
         private func drawLine(from start: CGPoint, to end: CGPoint) {
             let lineLayer = CAShapeLayer()
             let linePath = UIBezierPath()
@@ -174,8 +162,6 @@ struct CameraViewController: UIViewControllerRepresentable {
             overlayLayer.addSublayer(lineLayer)
         }
 
-
-        
         private func drawDot(at point: CGPoint) {
             // Create a dot shape layer
             let dotLayer = CAShapeLayer()
@@ -187,105 +173,6 @@ struct CameraViewController: UIViewControllerRepresentable {
             
             // Add the dot layer to the overlay
             overlayLayer.addSublayer(dotLayer)
-        }
-
-
-        
-        private func handleFaceDetection(request: VNRequest, error: Error?) {
-            guard let results = request.results as? [VNFaceObservation], let faceObservation = results.first else {
-                DispatchQueue.main.async {
-                    self.parent.faceDetected = false
-                    self.parent.faceBoundaries = nil
-                }
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.parent.faceDetected = true
-                if let previewLayer = self.previewLayer {
-                    self.parent.faceBoundaries = self.convertBoundingBox(faceObservation.boundingBox, to: previewLayer.bounds.size)
-                }
-            }
-        }
-        
-        private func delayExtractSkinColor(_ sampleBuffer: CMSampleBuffer, faceObservation: VNFaceObservation) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                self.extractSkinColor(from: sampleBuffer, faceObservation: faceObservation)
-            }
-        }
-        
-        private func extractSkinColor(from sampleBuffer: CMSampleBuffer, faceObservation: VNFaceObservation) {
-            guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-            
-            let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-            let width = ciImage.extent.width
-            let height = ciImage.extent.height
-            
-            let boundingBox = faceObservation.boundingBox
-            let centerPoint = CGPoint(
-                x: boundingBox.midX * width,
-                y: boundingBox.midY * height
-            )
-            
-            let color = getColorFromCIImage(ciImage, at: centerPoint)
-            capturedColors.append(color)
-            
-            // Capture colors for 3 seconds and then calculate the average color
-            if capturedColors.count >= 10 {  // Assuming we capture 10 frames within 3 seconds
-                let averageColor = averageColor(from: capturedColors)
-                DispatchQueue.main.async {
-                    self.parent.skinColor = averageColor
-                    self.parent.onSkinColorDetected?(averageColor)
-                    self.stopRunning()  // Stop the session to prevent further updates
-                }
-            }
-        }
-        
-        private func getColorFromCIImage(_ image: CIImage, at point: CGPoint) -> UIColor {
-            let context = CIContext()
-            let pixel = context.createCGImage(image, from: CGRect(origin: point, size: CGSize(width: 1, height: 1)))
-            guard let data = pixel?.dataProvider?.data,
-                  let ptr = CFDataGetBytePtr(data) else {
-                return UIColor.clear
-            }
-            
-            let r = CGFloat(ptr[0]) / 255.0
-            let g = CGFloat(ptr[1]) / 255.0
-            let b = CGFloat(ptr[2]) / 255.0
-            let a = CGFloat(ptr[3]) / 255.0
-            
-            return UIColor(red: r, green: g, blue: b, alpha: a)
-        }
-        
-        private func averageColor(from colors: [UIColor]) -> UIColor {
-            var red: CGFloat = 0
-            var green: CGFloat = 0
-            var blue: CGFloat = 0
-            var alpha: CGFloat = 0
-            
-            for color in colors {
-                var r: CGFloat = 0
-                var g: CGFloat = 0
-                var b: CGFloat = 0
-                var a: CGFloat = 0
-                color.getRed(&r, green: &g, blue: &b, alpha: &a)
-                
-                red += r
-                green += g
-                blue += b
-                alpha += a
-            }
-            
-            let count = CGFloat(colors.count)
-            return UIColor(red: red / count, green: green / count, blue: blue / count, alpha: alpha / count)
-        }
-        
-        private func convertBoundingBox(_ boundingBox: CGRect, to size: CGSize) -> CGRect {
-            let width = boundingBox.width * size.width
-            let height = boundingBox.height * size.height
-            let x = boundingBox.origin.x * size.width
-            let y = (1 - boundingBox.origin.y - boundingBox.height) * size.height
-            return CGRect(x: x, y: y, width: width, height: height)
         }
     }
     
