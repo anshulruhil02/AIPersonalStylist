@@ -4,6 +4,7 @@ import Vision
 
 struct CameraViewController: UIViewControllerRepresentable {
     var overlayLayer: CALayer? = CALayer()
+    var userHeight: CGFloat
     
     class Coordinator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         var parent: CameraViewController
@@ -12,7 +13,7 @@ struct CameraViewController: UIViewControllerRepresentable {
         var overlayLayer: CALayer!
         var previousJointPoints: [VNHumanBodyPoseObservation.JointName: CGPoint] = [:]
         var lastPoseChangeTime: Date = Date()
-        let poseStabilityThreshold: TimeInterval = 2.0
+        let poseStabilityThreshold: TimeInterval = 1.0
         let maxFramesForSmoothing = 5
         
         init(parent: CameraViewController) {
@@ -84,9 +85,6 @@ struct CameraViewController: UIViewControllerRepresentable {
                         // Draw dots for all landmarks
                         self?.drawBodyLandmarks(for: firstBodyPose)
                     }
-                } else {
-                    DispatchQueue.main.async {
-                    }
                 }
             }
             
@@ -153,8 +151,6 @@ struct CameraViewController: UIViewControllerRepresentable {
             // Check pose stability only if all connections exist
             if allConnectionsExist {
                 checkPoseStability(currentJointPoints: jointPoints)
-            } else {
-                //print("Skipping pose stability check due to missing connections.")
             }
         }
 
@@ -186,18 +182,48 @@ struct CameraViewController: UIViewControllerRepresentable {
             overlayLayer.addSublayer(dotLayer)
         }
         
-        private func checkPoseStability(currentJointPoints: [VNHumanBodyPoseObservation.JointName: CGPoint]) {
-            let poseChanged = hasPoseChanged(currentJointPoints: currentJointPoints)
+        private func calculateScalingFactor(jointPoints: [VNHumanBodyPoseObservation.JointName: CGPoint]) -> CGFloat? {
+            guard let head = jointPoints[.neck],
+                  let leftAnkle = jointPoints[.leftAnkle],
+                  let rightAnkle = jointPoints[.rightAnkle] else { return nil }
             
-            if poseChanged {
-                lastPoseChangeTime = Date()  // Reset the timer
-                previousJointPoints = currentJointPoints
-            } else if Date().timeIntervalSince(lastPoseChangeTime) > poseStabilityThreshold {
-                print("Pose has remained unchanged for more than 5 seconds.")
-                print(currentJointPoints)
-                exportJointCoordinatesToFile(jointPoints: currentJointPoints)
+            let ankleY = (leftAnkle.y + rightAnkle.y) / 2
+            let pixelHeight = abs(head.y - ankleY)
+            return parent.userHeight / pixelHeight
+        }
+        
+        private func calculateRealWorldDistances(jointPoints: [VNHumanBodyPoseObservation.JointName: CGPoint], scalingFactor: CGFloat) {
+            let connections: [(VNHumanBodyPoseObservation.JointName, VNHumanBodyPoseObservation.JointName)] = [
+                (.neck, .leftShoulder), (.neck, .rightShoulder),
+                (.leftShoulder, .leftElbow), (.rightShoulder, .rightElbow),
+                (.leftElbow, .leftWrist), (.rightElbow, .rightWrist),
+                (.leftHip, .rightHip)
+            ]
+            
+            for (start, end) in connections {
+                if let startPoint = jointPoints[start], let endPoint = jointPoints[end] {
+                    let pixelDistance = hypot(startPoint.x - endPoint.x, startPoint.y - endPoint.y)
+                    let realDistance = pixelDistance * scalingFactor
+                    print("\(start.rawValue) to \(end.rawValue): \(String(format: "%.2f", realDistance)) meters")
+                }
             }
         }
+
+        
+        private func checkPoseStability(currentJointPoints: [VNHumanBodyPoseObservation.JointName: CGPoint]) {
+            let poseChanged = hasPoseChanged(currentJointPoints: currentJointPoints)
+            if poseChanged {
+                lastPoseChangeTime = Date()
+                previousJointPoints = currentJointPoints
+            } else if Date().timeIntervalSince(lastPoseChangeTime) > poseStabilityThreshold {
+                print("Pose unchanged for \(poseStabilityThreshold) seconds.")
+                
+                if let scalingFactor = calculateScalingFactor(jointPoints: currentJointPoints) {
+                    calculateRealWorldDistances(jointPoints: currentJointPoints, scalingFactor: scalingFactor)
+                }
+            }
+        }
+        
 
         private func exportJointCoordinatesToFile(jointPoints: [VNHumanBodyPoseObservation.JointName: CGPoint]) {
             print("Pose Joint Coordinates:")

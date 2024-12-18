@@ -8,7 +8,7 @@ struct CameraView: View {
 
     var body: some View {
         ZStack {
-            CameraViewController()
+            CameraViewController(userHeight: 1.9)
                 .edgesIgnoringSafeArea(.all)
         }
     }
