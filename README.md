@@ -1,1 +1,1 @@
-
+This project uses Apple Vision Framework to detect body landmarks from a live camera feed and calculates real-world body dimensions based on the user’s height. The goal is to connect users with clothing items that perfectly fit their unique measurements, offering a tailored shopping experience.
