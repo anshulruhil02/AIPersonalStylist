@@ -11,8 +11,8 @@ struct CameraView: View {
             CameraViewController(faceDetected: $faceDetected, faceBoundaries: $faceBoundaries, skinColor: $skinColor, onSkinColorDetected: onSkinColorDetected)
                 .edgesIgnoringSafeArea(.all)
             
-            FaceDetectionOverlay(faceBoundaries: faceBoundaries)
-                .edgesIgnoringSafeArea(.all)
+//            FaceDetectionOverlay(faceBoundaries: faceBoundaries)
+//                .edgesIgnoringSafeArea(.all)
         }
     }
 }

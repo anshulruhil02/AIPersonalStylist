@@ -6,12 +6,14 @@ struct CameraViewController: UIViewControllerRepresentable {
     @Binding var faceDetected: Bool
     @Binding var faceBoundaries: CGRect?
     @Binding var skinColor: UIColor
+    var overlayLayer: CALayer? = CALayer()
     var onSkinColorDetected: ((UIColor) -> Void)?
     
     class Coordinator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         var parent: CameraViewController
         var session: AVCaptureSession
         var previewLayer: AVCaptureVideoPreviewLayer!
+        var overlayLayer: CALayer!
         var capturedColors: [UIColor] = []
         lazy var faceDetectionRequest: VNDetectFaceRectanglesRequest = {
             return VNDetectFaceRectanglesRequest(completionHandler: self.handleFaceDetection)
@@ -62,31 +64,130 @@ struct CameraViewController: UIViewControllerRepresentable {
         }
         
         func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+            // Get the pixel buffer from the video frame
             guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
 
+            // Create a Vision request handler
             let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:])
-            do {
-                try requestHandler.perform([faceDetectionRequest])
-            } catch {
-                print(error)
+
+            // Perform the body pose request
+            let bodyPoseRequest = VNDetectHumanBodyPoseRequest { [weak self] request, error in
+                if let error = error {
+                    print("Body pose detection error: \(error)")
+                    return
+                }
+
+                // Check for detected body pose results
+                if let results = request.results as? [VNHumanBodyPoseObservation], let firstBodyPose = results.first {
+                    DispatchQueue.main.async {
+                        print("Body detected!")
+                        // Clear the previous overlay dots
+                        self?.parent.overlayLayer?.sublayers?.forEach { $0.removeFromSuperlayer() }
+
+                        // Draw dots for all landmarks
+                        self?.drawBodyLandmarks(for: firstBodyPose)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        print("No body detected.")
+                    }
+                }
             }
 
-            // Check if a face was detected and process the frame
-            if let faceObservation = (faceDetectionRequest.results)?.first {
-                DispatchQueue.main.async {
-                    self.parent.faceDetected = true
-                    if let previewLayer = self.previewLayer {
-                        self.parent.faceBoundaries = self.convertBoundingBox(faceObservation.boundingBox, to: previewLayer.bounds.size)
-                    }
-                    self.delayExtractSkinColor(sampleBuffer, faceObservation: faceObservation)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.parent.faceDetected = false
-                    self.parent.faceBoundaries = nil
-                }
+            // Perform the Vision request
+            do {
+                try requestHandler.perform([bodyPoseRequest])
+            } catch {
+                print("Failed to perform body pose request: \(error)")
             }
         }
+        
+        private func drawBodyLandmarks(for bodyPose: VNHumanBodyPoseObservation) {
+            // Clear previous lines and dots
+            overlayLayer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            
+            // Retrieve all joint names and positions
+            let jointNames: [VNHumanBodyPoseObservation.JointName] = [
+                .neck,
+                .leftShoulder, .rightShoulder,
+                .leftElbow, .rightElbow,
+                .leftWrist, .rightWrist,
+                .leftHip, .rightHip,
+                .leftKnee, .rightKnee,
+                .leftAnkle, .rightAnkle
+            ]
+            
+            var jointPoints = [VNHumanBodyPoseObservation.JointName: CGPoint]()
+
+            // Extract points for each joint
+            for jointName in jointNames {
+                if let point = try? bodyPose.recognizedPoint(jointName), point.confidence > 0.3 { // Lowered threshold
+                    let normalizedPoint = CGPoint(x: point.location.x, y: 1 - point.location.y) // Flip vertically
+                    print("\(jointName): \(point.confidence)")
+                    if let previewLayer = self.previewLayer {
+                        let screenPoint = previewLayer.layerPointConverted(fromCaptureDevicePoint: normalizedPoint)
+                        jointPoints[jointName] = screenPoint
+                        drawDot(at: screenPoint)
+                    }
+                }
+
+            }
+
+
+            // Define skeletal connections
+            let connections: [(VNHumanBodyPoseObservation.JointName, VNHumanBodyPoseObservation.JointName)] = [
+                (.neck, .leftShoulder), (.neck, .rightShoulder),
+                (.leftShoulder, .leftElbow), (.rightShoulder, .rightElbow),
+                (.leftElbow, .leftWrist), (.rightElbow, .rightWrist),
+                (.leftShoulder,.leftHip), (.rightShoulder, .rightHip),
+                (.leftHip, .rightHip), // Add this connection between left and right hips
+                (.leftHip, .leftKnee), (.rightHip, .rightKnee),
+                (.leftKnee, .leftAnkle), (.rightKnee, .rightAnkle),
+            ]
+
+            
+            // Draw lines for connections
+            for (startJoint, endJoint) in connections {
+                if let start = jointPoints[startJoint], let end = jointPoints[endJoint] {
+                    drawLine(from: start, to: end)
+                }
+            }
+            
+            
+        }
+
+        
+        private func drawLine(from start: CGPoint, to end: CGPoint) {
+            let lineLayer = CAShapeLayer()
+            let linePath = UIBezierPath()
+            linePath.move(to: start)
+            linePath.addLine(to: end)
+            
+            lineLayer.path = linePath.cgPath
+            lineLayer.strokeColor = UIColor.green.cgColor // Line color
+            lineLayer.lineWidth = 2.0
+            lineLayer.fillColor = UIColor.clear.cgColor
+            
+            // Add the line layer to the overlay
+            overlayLayer.addSublayer(lineLayer)
+        }
+
+
+        
+        private func drawDot(at point: CGPoint) {
+            // Create a dot shape layer
+            let dotLayer = CAShapeLayer()
+            let dotSize: CGFloat = 6.0
+            let dotRect = CGRect(x: point.x - dotSize / 2, y: point.y - dotSize / 2, width: dotSize, height: dotSize)
+            
+            dotLayer.path = UIBezierPath(ovalIn: dotRect).cgPath
+            dotLayer.fillColor = UIColor.red.cgColor
+            
+            // Add the dot layer to the overlay
+            overlayLayer.addSublayer(dotLayer)
+        }
+
+
         
         private func handleFaceDetection(request: VNRequest, error: Error?) {
             guard let results = request.results as? [VNFaceObservation], let faceObservation = results.first else {
@@ -193,19 +294,30 @@ struct CameraViewController: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
         let controller = UIViewController()
         
-        // Add the preview layer
+        // Add the camera preview layer
         let previewLayer = AVCaptureVideoPreviewLayer(session: context.coordinator.session)
         previewLayer.videoGravity = .resizeAspectFill
         context.coordinator.previewLayer = previewLayer
         controller.view.layer.addSublayer(previewLayer)
         
+        // Add the overlay layer on top of the camera preview
+        let overlayLayer = CALayer()
+        overlayLayer.frame = controller.view.bounds
+        overlayLayer.backgroundColor = UIColor.clear.cgColor // Transparent background
+        controller.view.layer.addSublayer(overlayLayer)
+        
+        // Pass the overlayLayer to the coordinator
+        context.coordinator.overlayLayer = overlayLayer
+
         DispatchQueue.main.async {
             previewLayer.frame = controller.view.bounds
+            overlayLayer.frame = controller.view.bounds
             context.coordinator.startRunning()
         }
         
         return controller
     }
+
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
     
